@@ -1,16 +1,42 @@
-# This is a sample Python script.
+import json
+from datetime import date
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Загружаем расписание
+with open("schedule.json", "r", encoding="utf-8") as f:
+    schedule = json.load(f)
 
+# Функция для определения номера недели (1 или 2)
+def get_week_number():
+    current_week = date.today().isocalendar().week
+    return 1 if current_week % 2 != 0 else 2  # нечётные недели — 1, чётные — 2
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Функция для получения пар на день с учётом недели
+def get_day_schedule(day_name):
+    week_num = get_week_number()
+    day_lessons = schedule.get(day_name, [])
 
+    # Группируем пары по времени
+    grouped = {}
+    for lesson in day_lessons:
+        key = (lesson["start"], lesson["end"])
+        grouped.setdefault(key, []).append(lesson)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    # Выбираем первую или вторую запись по неделе
+    result = []
+    for (start, end), lessons in grouped.items():
+        if len(lessons) == 1:
+            result.append(lessons[0])
+        else:
+            index = 0 if week_num == 1 else 1
+            if index < len(lessons):
+                result.append(lessons[index])
+            else:
+                result.append(lessons[0])  # на всякий случай fallback
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    return result
+
+# Пример использования:
+today = "Вівторок"
+for lesson in get_day_schedule(today):
+    print(f"{lesson['start']}–{lesson['end']}: {lesson['subject']} ({lesson['link']})")
+
