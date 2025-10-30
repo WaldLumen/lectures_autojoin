@@ -1,29 +1,29 @@
 {
-  "Понеділок": [
-    { "start": "08:30", "end": "09:50", "subject": "ООП", "link": "" },
-    { "start": "10:00", "end": "11:20", "subject": "ООП", "link": "" },
-    { "start": "12:00", "end": "13:20", "subject": "Технологія захисту інформації", "link": "" }
+  "0": [
+    { "start": "08:30", "end": "09:50", "subject": "ООП", "link": "https://us02web.zoom.us/j/82259074965?pwd=dTNpdGVFRytxRDRBdHpYWUtZektkZz09 " },
+    { "start": "10:00", "end": "11:20", "subject": "ООП", "link": "https://us02web.zoom.us/j/82259074965?pwd=dTNpdGVFRytxRDRBdHpYWUtZektkZz09 " },
+    { "start": "12:00", "end": "13:20", "subject": "Технологія захисту інформації", "link": "https://us02web.zoom.us/j/82259074965?pwd=dTNpdGVFRytxRDRBdHpYWUtZektkZz09 " }
   ],
-  "Вівторок": [
-    { "start": "08:30", "end": "09:50", "subject": "Адміністрування", "link": "" },
-    { "start": "10:00", "end": "11:20", "subject": "Адміністрування", "link": "" },
-    { "start": "10:00", "end": "11:20", "subject": "Технологія створення ПП", "link": "" }
+  "1": [
+    { "start": "08:30", "end": "09:50", "subject": "Адміністрування", "link": "https://us02web.zoom.us/j/82259074965?pwd=dTNpdGVFRytxRDRBdHpYWUtZektkZz09" },
+    { "start": "10:00", "end": "11:20", "subject": "Адміністрування", "link": "https://us02web.zoom.us/j/82259074965?pwd=dTNpdGVFRytxRDRBdHpYWUtZektkZz09" },
+    { "start": "10:00", "end": "11:20", "subject": "Технологія створення ПП", "link": "https://meet.google.com/pqy-tdmq-rfd" }
   ],
-  "Середа": [
-    { "start": "08:30", "end": "09:50", "subject": "РКСЗ", "link": "" },
-    { "start": "10:00", "end": "11:20", "subject": "РКСЗ", "link": "" },
-    { "start": "12:00", "end": "13:20", "subject": "ООП", "link": "" }
+  "2": [
+    { "start": "08:30", "end": "09:50", "subject": "РКСЗ", "link": "https://us02web.zoom.us/j/82259074965?pwd=dTNpdGVFRytxRDRBdHpYWUtZektkZz09 " },
+    { "start": "10:00", "end": "11:20", "subject": "РКСЗ", "link": "https://us02web.zoom.us/j/82259074965?pwd=dTNpdGVFRytxRDRBdHpYWUtZektkZz09 " },
+    { "start": "12:00", "end": "13:20", "subject": "ООП", "link": "https://us02web.zoom.us/j/82259074965?pwd=dTNpdGVFRytxRDRBdHpYWUtZektkZz09 " }
   ],
-  "Четвер": [
-    { "start": "08:30", "end": "09:50", "subject": "РКСЗ", "link": "" },
-    { "start": "10:00", "end": "11:20", "subject": "Чисельні методи", "link": "" },
-    { "start": "10:00", "end": "11:20", "subject": "Технологія захисту інформації", "link": "" },
-    { "start": "12:00", "end": "13:20", "subject": "Культурологія", "link": "" },
-    { "start": "13:30", "end": "14:50", "subject": "Основи філософських знань", "link": "" },
-    { "start": "13:30", "end": "14:50", "subject": "Теорія матриць", "link": "" }
+  "3": [
+    { "start": "08:30", "end": "09:50", "subject": "РКСЗ", "link": "https://us02web.zoom.us/j/82259074965?pwd=dTNpdGVFRytxRDRBdHpYWUtZektkZz09 " },
+    { "start": "10:00", "end": "11:20", "subject": "Чисельні методи", "link": "https://us04web.zoom.us/j/8197161159?pwd=YTR1MXFuTkl2d0JucmphUzI2ZDk0Zz09" },
+    { "start": "10:00", "end": "11:20", "subject": "Технологія захисту інформації", "link": "https://us02web.zoom.us/j/82259074965?pwd=dTNpdGVFRytxRDRBdHpYWUtZektkZz09 " },
+    { "start": "12:00", "end": "13:20", "subject": "Культурологія", "link": "https://meet.google.com/csv-krjd-cha" },
+    { "start": "13:30", "end": "14:50", "subject": "Основи філософських знань", "link": "https://us05web.zoom.us/j/9640379685?pwd=WDVpZlNEc0NBVFVhL3VESDRVbERBZz09&omn=85642288016" },
+    { "start": "13:30", "end": "14:50", "subject": "Теорія матриць", "link": "https://meet.google.com/rrm-yxgc-tob?authuser=0" }
   ],
-  "П’ятниця": [
-    { "start": "10:00", "end": "11:20", "subject": "Чисельні методи", "link": "" },
-    { "start": "12:00", "end": "13:20", "subject": "Основи охорони праці", "link": "" }
+  "4": [
+    { "start": "10:00", "end": "11:20", "subject": "Чисельні методи", "link": "https://us04web.zoom.us/j/8197161159?pwd=YTR1MXFuTkl2d0JucmphUzI2ZDk0Zz09" },
+    { "start": "12:00", "end": "13:20", "subject": "Основи охорони праці", "link": "https://meet.google.com/bja-tsrf-tvj " }
   ]
 }

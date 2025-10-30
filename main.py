@@ -1,19 +1,46 @@
 import json
-from datetime import date
 
-# Загружаем расписание
-with open("schedule.json", "r", encoding="utf-8") as f:
-    schedule = json.load(f)
+import datetime
+import time
+import webbrowser
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+
+def browser_actions(link):
+    options = Options()
+    options.add_argument(r"user-data-dir=C:\Users\sylv\Documents")
+    options.add_argument(r"--profile-directory=Selenium")
+
+    prefs = {
+        "profile.default_content_setting_values.media_stream_mic": 2,
+        "profile.default_content_setting_values.media_stream_camera": 2
+    }
+    options.add_experimental_option("prefs", prefs)
+
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+
+    driver = webdriver.Chrome(options=options)
+
+    # Открываем ссылку
+    driver.get(link)
+    time.sleep(5)
+    driver.find_element("class name", "UywwFc-vQzf8d").click()
+
+
 
 # Функция для определения номера недели (1 или 2)
 def get_week_number():
-    current_week = date.today().isocalendar().week
+    current_week =datetime.date.today().isocalendar().week
     return 1 if current_week % 2 != 0 else 2  # нечётные недели — 1, чётные — 2
 
 # Функция для получения пар на день с учётом недели
-def get_day_schedule(day_name):
+def get_day_schedule(day_num):
     week_num = get_week_number()
-    day_lessons = schedule.get(day_name, [])
+    day_lessons = schedule.get(day_num, [])
 
     # Группируем пары по времени
     grouped = {}
@@ -34,9 +61,48 @@ def get_day_schedule(day_name):
                 result.append(lessons[0])  # на всякий случай fallback
 
     return result
+# Загружаем расписание
+with open("schedule.json", "r", encoding="utf-8") as f:
+    schedule = json.load(f)
 
 # Пример использования:
-today = "Вівторок"
-for lesson in get_day_schedule(today):
-    print(f"{lesson['start']}–{lesson['end']}: {lesson['subject']} ({lesson['link']})")
+
+is_lecture = False
+opened_links = set()
+
+today_lessons = []
+
+while True:
+    now = datetime.datetime.now().time()
+
+    if datetime.time(1, 1) <= now <= datetime.time(1, 2) or today_lessons == []:
+        today = datetime.date.weekday(datetime.date.today()).__str__()
+        today_lessons = get_day_schedule(today)
+
+        # Для справки выводим
+        print("Пары на сегодня:")
+        for lesson in today_lessons:
+            print(f"{lesson['start']}–{lesson['end']}: {lesson['subject']}")
+
+    for lesson in today_lessons:
+        start_h, start_m = map(int, lesson["start"].split(":"))
+        end_h, end_m = map(int, lesson["end"].split(":"))
+
+        start_time = datetime.time(start_h, start_m)
+        end_time = datetime.time(end_h, end_m)
+
+        # Проверяем, что сейчас идёт пара
+        if start_time <= now <= end_time:
+            # Проверяем, что ссылку ещё не открывали
+            if lesson["link"] not in opened_links:
+                print(f"Сейчас идёт пара: {lesson['subject']} ({lesson['start']}–{lesson['end']})")
+                if not is_lecture:
+                    browser_actions(lesson['link'])
+                    is_lecture = True
+
+                opened_links.add(lesson["link"])
+            break  # если нашли текущую пару, дальше не проверяем
+
+    time.sleep(60)  # проверяем каждую минуту
+
 
