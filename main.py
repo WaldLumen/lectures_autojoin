@@ -2,12 +2,15 @@ import json
 
 import datetime
 import time
-import webbrowser
 
+import pyautogui
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions
+
+
 
 def browser_actions(link):
     options = Options()
@@ -25,10 +28,27 @@ def browser_actions(link):
 
     driver = webdriver.Chrome(options=options)
 
-    # Открываем ссылку
-    driver.get(link)
-    time.sleep(5)
-    driver.find_element("class name", "UywwFc-vQzf8d").click()
+    if "meet.google.com" in link :
+        # Открываем ссылку
+        driver.get(link)
+        time.sleep(5)
+        driver.find_element("class name", "UywwFc-vQzf8d").click()
+    if "us02web.zoom.us" in link:
+
+        driver.get(link)
+
+        driver.find_element("class name", "mbTuDeF1").click()
+
+        driver.find_element("xpath", "//a[contains(text(), 'Join from your browser')]").click()
+
+        time.sleep(3)
+
+        pyautogui.moveTo(2000, 1010, duration=1)
+        pyautogui.click()
+
+    return driver
+
+
 
 
 
@@ -97,11 +117,24 @@ while True:
             if lesson["link"] not in opened_links:
                 print(f"Сейчас идёт пара: {lesson['subject']} ({lesson['start']}–{lesson['end']})")
                 if not is_lecture:
-                    browser_actions(lesson['link'])
+                    browser = browser_actions(lesson['link'])
                     is_lecture = True
 
                 opened_links.add(lesson["link"])
+            is_lecture = False
             break  # если нашли текущую пару, дальше не проверяем
+
+        elif now > end_time and lesson["link"] in opened_links:
+            print(f"Пара {lesson['subject']} закончилась ({lesson['end']}). Закрываю браузер.")
+            try:
+                if browser:
+                    browser.quit()
+                    browser = None
+            except Exception as e:
+                print("Ошибка при закрытии браузера:", e)
+
+            opened_links.remove(lesson["link"])
+
 
     time.sleep(60)  # проверяем каждую минуту
 
